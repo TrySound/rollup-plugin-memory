@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-memory",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Load entry from memory",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
