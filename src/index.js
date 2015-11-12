@@ -22,12 +22,7 @@ export default function memory(opts = {}) {
     let path = typeof opts.path === 'string' ? opts.path : false;
 
     return {
-        resolveId: once(id => {
-            return path || id;
-        }),
-
-        load: once(() => {
-            return contents;
-        })
+        resolveId: once(id => path || id ),
+        load: once(() => contents )
     };
 }
