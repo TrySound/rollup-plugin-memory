@@ -1,4 +1,7 @@
-# rollup-plugin-memory
+# rollup-plugin-memory [![Build Status][ci-img]][ci]
+
+[ci-img]:  https://travis-ci.org/TrySound/rollup-plugin-memory.svg
+[ci]:      https://travis-ci.org/TrySound/rollup-plugin-memory
 
 Load entry from memory
 
