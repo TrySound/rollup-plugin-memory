@@ -20,9 +20,9 @@ import memory from 'rollup-plugin-memory';
 rollup({
     entry: 'main.js',
     plugins: [
-        memory([
+        memory({
             contents: 'console.log("some code");'
-        ])
+        })
     ]
 });
 ```
