@@ -1,28 +1,42 @@
-function once(fn) {
-    var called = false;
-    return (...args) => {
-        if (!called) {
-            called = true;
-            return fn(...args);
-        }
-    };
+function isPath(path) {
+    return typeof path === 'string';
 }
 
-export default function memory(opts = {}) {
-    if (typeof opts.contents !== 'string' &&
-        !(opts.contents instanceof Buffer)
-    ) {
-        throw Error([
-            'rollup-plugin-memory',
-            'opts.contents should be string or buffer instance'
-        ].join(': '));
-    }
+function isContents(contents) {
+    return typeof contents === 'string' || Buffer.isBuffer(contents);
+}
 
-    let contents = opts.contents.toString();
-    let path = typeof opts.path === 'string' ? opts.path : false;
+export default function memory(config = {}) {
+    let path = isPath(config.path) ? config.path : null;
+    let contents = isContents(config.contents) ? String(config.contents) : null;
 
     return {
-        resolveId: once(id => path || id ),
-        load: once(() => contents )
+        options(options) {
+            const { entry } = options;
+            if (entry && typeof entry === 'object') {
+                if (isPath(entry.path)) {
+                    path = entry.path;
+                }
+                if (isContents(entry.contents)) {
+                    contents = String(entry.contents);
+                }
+            }
+            options.entry = path;
+        },
+
+        resolveId(id) {
+            if (path === null || contents === null) {
+                throw Error('\'path\' should be a string and \'contents\' should be a string of Buffer');
+            }
+            if (id === path) {
+                return path;
+            }
+        },
+
+        load(id) {
+            if (id === path) {
+                return contents;
+            }
+        }
     };
 }
