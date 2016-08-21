@@ -18,30 +18,17 @@ import { rollup } from 'rollup';
 import memory from 'rollup-plugin-memory';
 
 rollup({
-    entry: 'main.js',
+    entry: {
+        path: 'main.js',
+        contents: 'console.log("some code");'
+    },
     plugins: [
-        memory({
-            contents: 'console.log("some code");'
-        })
+        memory()
     ]
 });
 ```
 
-## Options
-
-### options.contents
-
-Required. Type: `string` or `Buffer`
-
-Preloaded content
-
-### options.path
-
-Options. Type: `string`
-
-Path to loaded content. If this options specified rollup `entry` will be skipped
-
-> rollup `entry` still should contain any non-empty string
+`path` is a string like normal entry. `contents` is a string or Buffer with preloaded content.
 
 # License
 
