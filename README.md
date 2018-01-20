@@ -1,5 +1,7 @@
 # rollup-plugin-memory [![Build Status][ci-img]][ci]
 
+> Deprecated: use [rollup-plugin-virtual](https://github.com/rollup/rollup-plugin-virtual) instead
+
 [ci-img]:  https://travis-ci.org/TrySound/rollup-plugin-memory.svg
 [ci]:      https://travis-ci.org/TrySound/rollup-plugin-memory
 
